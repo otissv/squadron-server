@@ -29,5 +29,9 @@ export default {
     host: 'localhost',
     db  : 'test'
   },
-  services: services.development
+  services: services.development,
+  "cors": [
+    "http://localhost:3000",
+    "http://loop.local.3000"
+  ]
 };

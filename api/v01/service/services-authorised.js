@@ -9,7 +9,7 @@ import {
 export default function authorisedService ({ auth, service }) {
   const host = service.host;
   const port = service.port;
-
+// console.log(host, port);
   const config = {
     url: `${host}:${port}/v01/graphql/`,
     method: 'POST',

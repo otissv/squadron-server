@@ -36,7 +36,6 @@ export default function appRoutes (app, context) {
   const locals = app.locals;
 
   app.use('/v01/auth/', (req, res, next) => {
-    console.log(req.body);
     authenication({
       body: req.body,
       client: {
@@ -91,7 +90,7 @@ export default function appRoutes (app, context) {
     /* eslint-disable no-unneeded-ternary */
     const mock = req.body.mock === 'true' ? true : false;
     /* eslint-enable no-unneeded-ternary */
-console.dir(req.body);
+
     return {
       ...apolloConfig({ context, mock, req, locals })
     };

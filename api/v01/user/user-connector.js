@@ -38,11 +38,11 @@ export default class User {
 
 
   findAll ({ args, locals, validation }) {
-    console.log('findAll');
     return promise((resolve, reject) => {
       r.table(TABLE)
         .run()
         .then(response => {
+          // console.log(response);
           resolve(response);
         })
         .catch(error => {

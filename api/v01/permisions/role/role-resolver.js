@@ -19,21 +19,21 @@ import canAccess from '../../v01-server-canAccess';
 export const roleQueries = {
   roleFindAll (_, args, context) {
     const fn = ({ args, context }) => context.connectors.role.findAll({ args, ...context });
-    return canAccess ({ type: ROLE_FIND_ALL, locals: context.locals})({
+    return canAccess ({ type: ROLE_FIND_ALL, locals: context.locals })({
       args, context, fn
     });
   },
 
-  ROLE_FIND_BY_ID (_, args, context) {
+  roleFindById (_, args, context) {
     const fn = ({ args, context }) => context.connectors.role.findById({ args, ...context });
-    return canAccess ({ type: ADDRESS_FIND_ALL, locals: context.locals})({
+    return canAccess({ type: ROLE_FIND_BY_ID, locals: context.locals })({
       args, context, fn
     });
   },
 
   roleFindByType (_, args, context) {
     const fn = ({ args, context }) => context.connectors.role.findByType({ args, ...context });
-    return canAccess ({ type: ROLE_FIND_BY_TYPE, locals: context.locals})({
+    return canAccess({ type: ROLE_FIND_BY_TYPE, locals: context.locals })({
       args, context, fn
     });
   },
@@ -43,21 +43,21 @@ export const roleQueries = {
 export const roleMutations = {
   roleCreate (_, args, context) {
     const fn = ({ args, context }) => context.connectors.role.create({ args, ...context });
-    return canAccess ({ type: ROLE_CREATE, locals: context.locals})({
+    return canAccess({ type: ROLE_CREATE, locals: context.locals })({
       args, context, fn
     });
   },
 
   roleUpdate (_, args, context) {
     const fn = ({ args, context }) => context.connectors.role.update({ args, ...context });
-    return canAccess ({ type: ROLE_UPDATE, locals: context.locals})({
+    return canAccess({ type: ROLE_UPDATE, locals: context.locals })({
       args, context, fn
     });
   },
 
   roleRemove (_, args, context) {
     const fn = ({ args, context }) => context.connectors.role.remove({ args, ...context });
-    return canAccess ({ type: ROLE_REMOVE, locals: context.locals})({
+    return canAccess({ type: ROLE_REMOVE, locals: context.locals })({
       args, context, fn
     });
   }
@@ -66,10 +66,10 @@ export const roleMutations = {
 
 export const Role = {
   createdBy (query, args, context) {
-    return createdBy(query, connectors.role);
+    return createdBy(query, context.connectors.role);
   },
 
   updatedBy (query, args, context) {
-    return updatedBy(query, connectors.role);
+    return updatedBy(query, context.connectors.role);
   }
 };

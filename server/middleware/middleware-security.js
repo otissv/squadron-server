@@ -13,10 +13,8 @@ export default function security (app) {
   app.disable('x-powered-by');
 
   // CORS
-  var whitelist = [
-    'http://localhost:3000',
-    '*'
-  ];
+  const whitelist = [...app.locals.cors];
+
   const corsOptions = {
     origin: function (origin, callback) {
       var originIsWhitelisted = whitelist.indexOf(origin) !== -1;

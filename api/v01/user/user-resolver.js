@@ -1,6 +1,5 @@
 'use strict';
 
-import { promise } from '../../../../squadron-utils';
 import {
   addresses,
   createdBy,
@@ -52,21 +51,21 @@ export const userQueries = {
 
 export const userMutations = {
   userCreate (_, args, context) {
-    return context.connectors.user.create({ args, ...context });
+    const fn = ({ args, context }) =>  context.connectors.user.create({ args, ...context });
     return canAccess({ type: USER_CREATE, locals: context.locals})({
       args, context, fn
     });
   },
 
   userUpdate (_, args, context) {
-    return context.connectors.user.update({ args, ...context });
+    const fn = ({ args, context }) =>  context.connectors.user.update({ args, ...context });
     return canAccess({ type: USER_UPDATE, locals: context.locals})({
       args, context, fn
     });
   },
 
   userRemove (_, args, context) {
-    return context.connectors.user.remove({ args, ...context });
+    const fn = ({ args, context }) =>  context.connectors.user.remove({ args, ...context });
     return canAccess({ type: USER_REMOVE, locals: context.locals})({
       args, context, fn
     });

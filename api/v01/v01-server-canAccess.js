@@ -1,7 +1,6 @@
 import { env } from '../../server/env/environment.js';
 import { promise } from '../../../squadron-utils';
 import redis from '../../server/databases/redis';
-import mapPromise from 'map-async-promise';
 import ERROR from './error/error.js';
 
 

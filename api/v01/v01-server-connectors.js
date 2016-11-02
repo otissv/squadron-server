@@ -11,7 +11,7 @@ const {
   actionMock,
   addressMock,
   noteMock,
-  rolesMock,
+  roleMock,
   userMock
 } = mocks;
 
