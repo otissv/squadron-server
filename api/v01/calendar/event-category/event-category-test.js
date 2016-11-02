@@ -1,18 +1,18 @@
 'use strict';
 
 import test from 'tape';
-import env from '../../../server/env/development-env';
-import fetch from '../../../utils/utilsfetch-test';
-import { rolesMock } from './role-mock';
+import env from '../../../../server/env/development-env';
+import fetch from '../../../../utils/utilsfetch-test';
+import { eventsMock } from '../event-category-mock';
 
 const API_URL = `${env.baseURL}/v01/graphql`;
 
 test('Users controller', nested => {
-  nested.test('rolesFind method: ', assert => {
+  nested.test('eventsFind method: ', assert => {
     const query = {
       query:`
       {
-        rolesFind {
+        eventsFind {
           id
           created
           dateOfBirth
@@ -22,7 +22,7 @@ test('Users controller', nested => {
           lastName
           telephone
           updated
-          rolename
+          eventname
           addresses {
           id
           }
@@ -45,11 +45,11 @@ test('Users controller', nested => {
       url   : API_URL,
       data: query,
       assert: (response) => {
-        const actaul = response.data.rolesFind;
-        const expect = rolesMock;
+        const actaul = response.data.eventsFind;
+        const expect = eventsMock;
 
         assert.deepEquals(actaul, expect,
-          'Find all roles');
+          'Find all events');
       }
     });
 
@@ -57,12 +57,12 @@ test('Users controller', nested => {
   });
 
 
-  nested.test('roleFindById method: ', assert => {
-    const id = rolesMock[0].id;
+  nested.test('eventFindById method: ', assert => {
+    const id = eventsMock[0].id;
 
     const query = {
-      query:` query roleFindById($id: String) {
-        roleFindById (id: $id) {
+      query:` query eventFindById($id: String) {
+        eventFindById (id: $id) {
           id
           created
           dateOfBirth
@@ -72,7 +72,7 @@ test('Users controller', nested => {
           lastName
           telephone
           updated
-          rolename
+          eventname
           addresses {
           id
           }
@@ -97,11 +97,11 @@ test('Users controller', nested => {
       url   : API_URL,
       data: query,
       assert: (response) => {
-        const actaul = response.data.roleFindById;
-        const expect = rolesMock[0];
+        const actaul = response.data.eventFindById;
+        const expect = eventsMock[0];
 
         assert.deepEquals(actaul, expect,
-          'Finds a role by id');
+          'Finds a event by id');
       }
     });
 
@@ -109,12 +109,12 @@ test('Users controller', nested => {
   });
 
 
-  nested.test('roleFindByUsername method: ', assert => {
-    const rolename = rolesMock[0].rolename;
+  nested.test('eventFindByUsername method: ', assert => {
+    const eventname = eventsMock[0].eventname;
 
     const query = {
-      query:` query roleFindByUsername($rolename: String) {
-        roleFindByUsername (rolename: $rolename) {
+      query:` query eventFindByUsername($eventname: String) {
+        eventFindByUsername (eventname: $eventname) {
           id
           created
           dateOfBirth
@@ -124,7 +124,7 @@ test('Users controller', nested => {
           lastName
           telephone
           updated
-          rolename
+          eventname
           addresses {
           id
           }
@@ -140,7 +140,7 @@ test('Users controller', nested => {
         }
       }`,
       variables: `{
-        "rolename": "${rolename}"
+        "eventname": "${eventname}"
       }`
     };
 
@@ -149,11 +149,11 @@ test('Users controller', nested => {
       url   : API_URL,
       data: query,
       assert: (response) => {
-        const actaul = response.data.roleFindByUsername;
-        const expect = rolesMock[0];
+        const actaul = response.data.eventFindByUsername;
+        const expect = eventsMock[0];
 
         assert.deepEquals(actaul, expect,
-          'Finds a role by rolename');
+          'Finds a event by eventname');
       }
     });
 

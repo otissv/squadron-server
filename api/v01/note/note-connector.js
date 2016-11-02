@@ -12,7 +12,7 @@ const TABLE = 'notes';
 
 
 export default class Note {
-  create ({ args, databases }) {
+  create ({ args, validation }) {
     const data = args;
 
     function callback (resolve) {
@@ -35,12 +35,7 @@ export default class Note {
   }
 
 
-  update ({ query, args, databases }) {
-
-  }
-
-
-  findAll ({ query, args, databases }) {
+  findAll ({ query, args, validation }) {
     return promise((resolve, reject) => {
       r.table(TABLE)
         .run()
@@ -55,7 +50,7 @@ export default class Note {
   }
 
 
-  findById ({ query, args, databases }) {
+  findById ({ query, args, validation }) {
     let obj = args || query;
     let getDocuments;
 
@@ -70,6 +65,25 @@ export default class Note {
         .run()
         .then(response => {
           resolve(response);
+        })
+        .catch(error => {
+          console.log(error);
+          reject(error);
+        });
+    });
+  }
+
+
+  remove ({ args, validation }) {
+    const id = args.id;
+
+    return promise((resolve, reject) => {
+      r.table(TABLE)
+        .getAll(id)
+        .delete()
+        .run()
+        .then(response => {
+          resolve(response[0]);
         })
         .catch(error => {
           console.log(error);

@@ -4,14 +4,17 @@ import {
   createdBy,
   notes,
   updatedBy
-} from '../context.js';
+} from '../v01-server-context.js';
 
 import {
   ADDRESS_CREATE,
-  ADDRESS_FIND,
+  ADDRESS_FIND_ALL,
   ADDRESS_FIND_BY_ID,
-  ADDRESS_UPDATE
-} from '../constants';
+  ADDRESS_UPDATE,
+  ADDRESS_REMOVE
+} from '../v01-server-constants';
+import canAccess from '../v01-server-canAccess';
+
 
 export const addressQueries = {
   addressFindAll (_, args, context) {
@@ -41,6 +44,13 @@ export const addressMutaions = {
   addressUpdate (_, args, context) {
     const fn = ({ args, context }) => context.connectors.address.update({ args, ...context });
     return canAccess ({ type: ADDRESS_UPDATE, locals: context.locals})({
+      args, context, fn
+    });
+  },
+
+  addressRemove (_, args, context) {
+    const fn = ({ args, context }) => context.connectors.address.remove({ args, ...context });
+    return canAccess ({ type: ADDRESS_REMOVE, locals: context.locals})({
       args, context, fn
     });
   }

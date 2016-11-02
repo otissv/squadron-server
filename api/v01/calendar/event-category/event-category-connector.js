@@ -2,18 +2,18 @@
 
 import R from 'ramda';
 import rethinkdbdash from 'rethinkdbdash';
-import { promise } from '../../../../squadron-utils';
-import { insert } from '../../../../rethinkdb-utils';
-import { env } from '../../../server/env/environment.js';
-import ERROR from '../error/error.js';
+import { promise } from '../../../../../squadron-utils';
+import { insert } from '../../../../../rethinkdb-utils';
+import { env } from '../../../../server/env/environment.js';
+import ERROR from '../../error/error.js';
 
 
-const TABLE = 'users';
+const TABLE = 'events';
 const dbConfig = env().rethinkdb;
 const r = rethinkdbdash(dbConfig);
 
 
-export default class User {
+export default class Event {
   create ({ args, validation }) {
     const data = args;
     function callback (resolve) {
@@ -77,13 +77,13 @@ export default class User {
   }
 
 
-  findByUsername ({ args }) {
-    const username = args.username;
-    const index = { index : 'username' };
+  findByEventname ({ args }) {
+    const eventname = args.eventname;
+    const index = { index : 'eventname' };
 
     return promise((resolve, reject) => {
       r.table(TABLE)
-        .getAll(username, index)
+        .getAll(eventname, index)
         .run()
         .then(response => {
           resolve(response[0]);
@@ -96,13 +96,13 @@ export default class User {
   }
 
 
-  findIdByUsername ({ args }) {
-    const username = args.username;
-    const index = { index : 'username' };
+  findIdByEventname ({ args }) {
+    const eventname = args.eventname;
+    const index = { index : 'eventname' };
 
     return promise((resolve, reject) => {
       r.table(TABLE)
-        .getAll(username, index)
+        .getAll(eventname, index)
         .pluck('id')
         .run()
         .then(response => {

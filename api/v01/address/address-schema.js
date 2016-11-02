@@ -56,4 +56,7 @@ export const addressMutaions = `
     status    : String,
     updated   : String,
   ): Address
+  addressRemove(
+    id        : String
+  ): Address
 `;

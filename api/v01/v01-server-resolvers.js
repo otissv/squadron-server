@@ -3,7 +3,7 @@
 import {
   actionMutations,
   actionQueries
-} from './action/action-resolver';
+} from './permisions/action/action-resolver';
 import {
   Address,
   addressMutaions,
@@ -18,7 +18,7 @@ import {
   Role,
   roleQueries,
   roleMutations
-} from './role/role-resolver';
+} from './permisions/role/role-resolver';
 import {
   User,
   userMutations,

@@ -5,10 +5,10 @@
 'use strict';
 
 import { apolloServer } from 'apollo-server';
-import connectors from './connectors';
-import resolvers from './resolvers';
-import schema from './schemas';
-import validation from './validation';
+import connectors from './v01-server-connectors';
+import resolvers from './v01-server-resolvers';
+import schema from './v01-server-schemas';
+import validation from './v01-server-validation';
 import {
   authenication,
   authorised
@@ -64,6 +64,7 @@ export default function appRoutes (app, context) {
     });
   });
 
+
   app.use('/v01/graphql', (req, res, next) => {
     const service = app.locals.services.authentication;
 
@@ -90,7 +91,7 @@ export default function appRoutes (app, context) {
     /* eslint-disable no-unneeded-ternary */
     const mock = req.body.mock === 'true' ? true : false;
     /* eslint-enable no-unneeded-ternary */
-console.log(req.body);
+console.dir(req.body);
     return {
       ...apolloConfig({ context, mock, req, locals })
     };

@@ -1,12 +1,12 @@
 'use strict';
 
-import { promise } from '../../../../squadron-utils';
+import { promise } from '../../../../../squadron-utils';
 import {
   addresses,
   createdBy,
   notes,
   updatedBy
-} from '../v01-server-context.js';
+} from '../../v01-server-context.js';
 import {
   USER_CREATE,
   USER_FIND_BY_ID,
@@ -15,34 +15,34 @@ import {
   USER_FIND_ALL,
   USER_REMOVE,
   USER_UPDATE
-} from '../v01-server-constants';
-import canAccess from '../v01-server-canAccess';
+} from '../../v01-server-constants';
+import canAccess from '../../v01-server-canAccess';
 
 
-export const userQueries = {
-  userFindAll (_, args, context) {
-    const fn = ({ args, context }) => context.connectors.user.findAll({ args, ...context });
+export const eventQueries = {
+  eventFindAll (_, args, context) {
+    const fn = ({ args, context }) => context.connectors.event.findAll({ args, ...context });
     return canAccess({ type: USER_FIND_ALL, locals: context.locals})({
       args, context, fn
     });
   },
 
-  userFindById (_, args, context) {
-    const fn = ({ args, context }) => context.connectors.user.findById({ args, ...context });
+  eventFindById (_, args, context) {
+    const fn = ({ args, context }) => context.connectors.event.findById({ args, ...context });
     return canAccess({ type: USER_FIND_BY_ID, locals: context.locals})({
       args, context, fn
     });
   },
 
-  userFindByUsername (_, args, context) {
-    const fn = ({ args, context }) =>  context.connectors.user.findByUsername({ args, ...context });
+  eventFindByEventname (_, args, context) {
+    const fn = ({ args, context }) =>  context.connectors.event.findByEventname({ args, ...context });
     return canAccess({ type: USER_FIND_BY_USERNAME, locals: context.locals})({
       args, context, fn
     });
   },
 
-  userFindIdByUsername(_, args, context) {
-    const fn = ({ args, context }) =>  context.connectors.user.findIdByUsername({ args, ...context });
+  eventFindIdByEventname(_, args, context) {
+    const fn = ({ args, context }) =>  context.connectors.event.findIdByEventname({ args, ...context });
     return canAccess({ type: USER_FIND_ID_BY_USERNAME, locals: context.locals})({
       args, context, fn
     });
@@ -50,23 +50,23 @@ export const userQueries = {
 };
 
 
-export const userMutations = {
-  userCreate (_, args, context) {
-    return context.connectors.user.create({ args, ...context });
+export const eventMutations = {
+  eventCreate (_, args, context) {
+    return context.connectors.event.create({ args, ...context });
     return canAccess({ type: USER_CREATE, locals: context.locals})({
       args, context, fn
     });
   },
 
-  userUpdate (_, args, context) {
-    return context.connectors.user.update({ args, ...context });
+  eventUpdate (_, args, context) {
+    return context.connectors.event.update({ args, ...context });
     return canAccess({ type: USER_UPDATE, locals: context.locals})({
       args, context, fn
     });
   },
 
-  userRemove (_, args, context) {
-    return context.connectors.user.remove({ args, ...context });
+  eventRemove (_, args, context) {
+    return context.connectors.event.remove({ args, ...context });
     return canAccess({ type: USER_REMOVE, locals: context.locals})({
       args, context, fn
     });
@@ -74,13 +74,13 @@ export const userMutations = {
 };
 
 
-export const User = {
+export const Event = {
   addresses (query, args, context) {
     return addresses(query, connectors.address);
   },
 
   createdBy (query, args, context) {
-    return createdBy(query, connectors.user);
+    return createdBy(query, connectors.event);
   },
 
   notes (query, args, context) {
@@ -88,6 +88,6 @@ export const User = {
   },
 
   updatedBy (query, args, context) {
-    return updatedBy(query, connectors.user);
+    return updatedBy(query, connectors.event);
   }
 };

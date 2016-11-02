@@ -1,10 +1,10 @@
 'use strict';
 
-import mocks from './mocks';
-import Action from './action/action-connector';
+import mocks from './v01-server-mocks';
+import Action from './permisions/action/action-connector';
 import Address from './address/address-connector';
 import Note from './note/note-connector';
-import Role from './role/role-connector';
+import Role from './permisions/role/role-connector';
 import User from './user/user-connector';
 
 const {

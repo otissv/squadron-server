@@ -1,7 +1,7 @@
 'use strict';
 
-import { find, findById, findByField } from '../../../../squadron-utils';
-import { env } from '../../../server/env/environment.js';
+import { find, findById, findByField } from '../../../../../squadron-utils';
+import { env } from '../../../../server/env/environment.js';
 
 const SERVICE = env().services.server.host.replace(/http:\/\//i, '');
 
@@ -22,6 +22,10 @@ export const actionsMock = [
     key: `${SERVICE}:actions:ADDRESS_UPDATE`,
     roles: ['admin', 'user']
   },
+  {
+    key: `${SERVICE}:actions:ADDRESS_REMOVE`,
+    roles: ['admin', 'user']
+  },
 
 
   {
@@ -40,6 +44,10 @@ export const actionsMock = [
     key: `${SERVICE}:actions:NOTE_CREATE`,
     roles: ['admin', 'user']
   },
+  {
+    key: `${SERVICE}:actions:NOTE_REMOVE`,
+    roles: ['admin', 'user']
+  },
 
 
   {
@@ -51,6 +59,10 @@ export const actionsMock = [
     roles: ['admin', 'user']
   },
   {
+    key: `${SERVICE}:actions:ROLE_FIND_BY_TYPE`,
+    roles: ['admin', 'user']
+  },
+  {
     key: `${SERVICE}:actions:ROLE_CREATE`,
     roles: ['admin', 'user']
   },
@@ -58,6 +70,11 @@ export const actionsMock = [
     key: `${SERVICE}:actions:ROLE_UPDATE`,
     roles: ['admin', 'user']
   },
+  {
+    key: `${SERVICE}:actions:ROLE_REMOVE`,
+    roles: ['admin', 'user']
+  },
+
 
   {
     key: `${SERVICE}:actions:USER_CREATE`,

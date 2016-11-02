@@ -3,7 +3,7 @@
 import action, {
   actionMutations,
   actionQueries
-} from './action/action-schema';
+} from './permisions/action/action-schema';
 import address, {
   addressMutaions,
   addressQueries
@@ -15,7 +15,7 @@ import note, {
 import role, {
   roleQueries,
   roleMutations
-} from './role/role-schema';
+} from './permisions/role/role-schema';
 import user, {
   userMutaions,
   userQueries

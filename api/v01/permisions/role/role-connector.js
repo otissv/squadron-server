@@ -2,20 +2,20 @@
 
 import R from 'ramda';
 import rethinkdbdash from 'rethinkdbdash';
-import { promise } from '../../../../squadron-utils';
-import { insert } from '../../../../rethinkdb-utils';
-import { env } from '../../../server/env/environment.js';
-import ERROR from '../error/error.js';
+import { promise } from '../../../../../squadron-utils';
+import { insert } from '../../../../../rethinkdb-utils';
+import { env } from '../../../../server/env/environment.js';
 
 
-const TABLE = 'users';
 const dbConfig = env().rethinkdb;
 const r = rethinkdbdash(dbConfig);
+const TABLE = 'roles';
 
 
-export default class User {
+export default class Role {
   create ({ args, validation }) {
     const data = args;
+
     function callback (resolve) {
       return R.curry((response) => {
         if (response.errors) return response.errors;
@@ -37,8 +37,7 @@ export default class User {
   }
 
 
-  findAll ({ args, locals, validation }) {
-    console.log('findAll');
+  findAll ({ args, validation }) {
     return promise((resolve, reject) => {
       r.table(TABLE)
         .run()
@@ -77,13 +76,13 @@ export default class User {
   }
 
 
-  findByUsername ({ args }) {
-    const username = args.username;
-    const index = { index : 'username' };
+  findByType({ args, validation }) {
+    const type = args.type;
+    const index = { index : 'type' };
 
     return promise((resolve, reject) => {
       r.table(TABLE)
-        .getAll(username, index)
+        .getAll(type, index)
         .run()
         .then(response => {
           resolve(response[0]);
@@ -96,27 +95,7 @@ export default class User {
   }
 
 
-  findIdByUsername ({ args }) {
-    const username = args.username;
-    const index = { index : 'username' };
-
-    return promise((resolve, reject) => {
-      r.table(TABLE)
-        .getAll(username, index)
-        .pluck('id')
-        .run()
-        .then(response => {
-          resolve(response[0]);
-        })
-        .catch(error => {
-          console.log(error);
-          reject(error);
-        });
-    });
-  }
-
-
-  remove ({ args }) {
+  remove ({ args, validation }) {
     const id = args.id;
 
     return promise((resolve, reject) => {

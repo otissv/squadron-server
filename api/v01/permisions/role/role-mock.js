@@ -1,6 +1,6 @@
 'use strict';
 
-import { find, findById, findByField } from '../../../../squadron-utils';
+import { find, findById, findByField } from '../../../../../squadron-utils';
 
 
 export const rolesMock = [

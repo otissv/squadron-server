@@ -33,4 +33,7 @@ export const noteMutaions = `
     note      : String,
     updated   : String
   ): Note
+  noteRemove(
+    id        : String
+  ): Note
 `;

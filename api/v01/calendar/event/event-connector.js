@@ -2,20 +2,20 @@
 
 import R from 'ramda';
 import rethinkdbdash from 'rethinkdbdash';
-import { promise } from '../../../../squadron-utils';
-import { insert } from '../../../../rethinkdb-utils';
-import { env } from '../../../server/env/environment.js';
+import { promise } from '../../../../../squadron-utils';
+import { insert } from '../../../../../rethinkdb-utils';
+import { env } from '../../../../server/env/environment.js';
+import ERROR from '../error/error.js';
 
 
+const TABLE = 'events';
 const dbConfig = env().rethinkdb;
 const r = rethinkdbdash(dbConfig);
-const TABLE = 'roles';
 
 
-export default class Role {
-  create ({ args }) {
+export default class Event {
+  create ({ args, validation }) {
     const data = args;
-
     function callback (resolve) {
       return R.curry((response) => {
         if (response.errors) return response.errors;
@@ -37,28 +37,8 @@ export default class Role {
   }
 
 
-  update ({ args }) {
-    const id = args.id;
-
-    return promise((resolve, reject) => {
-      r.table(TABLE)
-        .get(id)
-        .update(args)
-        .run()
-        .then(response => {
-          resolve(this.findById({
-            args: { id }
-          }));
-        })
-        .catch(error => {
-          console.log(error);
-          reject(error);
-        });
-    });
-  }
-
-
-  findAll ({ args }) {
+  findAll ({ args, locals, validation }) {
+    console.log('findAll');
     return promise((resolve, reject) => {
       r.table(TABLE)
         .run()
@@ -73,7 +53,7 @@ export default class Role {
   }
 
 
-  findById ({ query, args }) {
+  findById ({ query, args, validation }) {
     let obj = args || query;
     let getDocuments;
 
@@ -97,13 +77,13 @@ export default class Role {
   }
 
 
-  findByType({ args }) {
-    const type = args.type;
-    const index = { index : 'type' };
+  findByEventname ({ args }) {
+    const eventname = args.eventname;
+    const index = { index : 'eventname' };
 
     return promise((resolve, reject) => {
       r.table(TABLE)
-        .getAll(type, index)
+        .getAll(eventname, index)
         .run()
         .then(response => {
           resolve(response[0]);
@@ -115,6 +95,27 @@ export default class Role {
     });
   }
 
+
+  findIdByEventname ({ args }) {
+    const eventname = args.eventname;
+    const index = { index : 'eventname' };
+
+    return promise((resolve, reject) => {
+      r.table(TABLE)
+        .getAll(eventname, index)
+        .pluck('id')
+        .run()
+        .then(response => {
+          resolve(response[0]);
+        })
+        .catch(error => {
+          console.log(error);
+          reject(error);
+        });
+    });
+  }
+
+
   remove ({ args }) {
     const id = args.id;
 
@@ -125,6 +126,27 @@ export default class Role {
         .run()
         .then(response => {
           resolve(response[0]);
+        })
+        .catch(error => {
+          console.log(error);
+          reject(error);
+        });
+    });
+  }
+
+
+  update ({ args, validation }) {
+    const id = args.id;
+
+    return promise((resolve, reject) => {
+      r.table(TABLE)
+        .get(id)
+        .update(args)
+        .run()
+        .then(response => {
+          resolve(this.findById({
+            args: { id }
+          }));
         })
         .catch(error => {
           console.log(error);

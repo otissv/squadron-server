@@ -2,17 +2,20 @@ export const ADDRESS_CREATE = 'ADDRESS_CREATE';
 export const ADDRESS_FIND_ALL = 'ADDRESS_FIND_ALL';
 export const ADDRESS_FIND_BY_ID = 'ADDRESS_FIND_BY_ID';
 export const ADDRESS_UPDATE = 'ADDRESS_UPDATE';
+export const ADDRESS_REMOVE = 'ADDRESS_REMOVE';
 
 export const NOTE_CREATE = 'NOTE_CREATE';
 export const NOTE_FIND_ALL = 'NOTE_FIND_ALL';
 export const NOTE_FIND_BY_ID = 'NOTE_FIND_BY_ID';
 export const NOTE_UPDATE = 'NOTE_UPDATE';
-
+export const NOTE_REMOVE = 'NOTE__REMOVE';
 
 export const ROLE_CREATE = 'ROLE_CREATE';
 export const ROLE_FIND_ALL = 'ROLE_FIND';
 export const ROLE_FIND_BY_ID = 'ROLE_FIND_BY_ID';
+export const ROLE_FIND_BY_TYPE = 'ROLE_FIND_BY_TYPE';
 export const ROLE_UPDATE = 'ROLE_UPDATE';
+export const ROLE_REMOVE = 'ROLE_REMOVE';
 
 export const USER_CREATE = 'USER_CREATE';
 export const USER_FIND_ALL = 'USER_FIND_ALL';

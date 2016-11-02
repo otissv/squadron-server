@@ -1,10 +1,10 @@
 'use strict';
 
-import { promise } from '../../../../squadron-utils';
+import { promise } from '../../../../../squadron-utils';
 import mapPromise from 'map-async-promise';
-import { env } from '../../../server/env/environment.js';
-import ERROR from '../error/error';
-import redis from '../../../server/databases/redis';
+import { env } from '../../../../server/env/environment.js';
+import ERROR from '../../error/error';
+import redis from '../../../../server/databases/redis';
 
 
 const TABLE = 'actions';
