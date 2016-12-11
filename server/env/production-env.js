@@ -29,6 +29,5 @@ export default {
     host: 'localhost',
     db  : 'test'
   },
-  services: services.production,
-  cors: []
+  services: services.production
 };

@@ -8,13 +8,19 @@ import helmet from 'helmet';
 import cors from 'cors';
 
 
-export default function security (app) {
 
+export default function security (app) {
+  const clientApp = app.locals.services.app;
+
+  ;
   app.disable('x-powered-by');
 
   // CORS
-  const whitelist = [...app.locals.cors];
-
+  var whitelist = [
+    `${clientApp.host}:${clientApp.port}`,
+    'http://localhost:3000',
+    '*'
+  ];
   const corsOptions = {
     origin: function (origin, callback) {
       var originIsWhitelisted = whitelist.indexOf(origin) !== -1;
