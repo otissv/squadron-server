@@ -59,7 +59,7 @@ export default class User {
     let getDocuments;
 
     if (Array.isArray(obj)) {
-      getDocuments = r.table(USERS_TABLE).getAll(...obj.map(i => i.id));
+      getDocuments = r.table(USERS_TABLE).getAll(...obj.map(i => i));
     } else {
       getDocuments = r.table(USERS_TABLE).get(obj.id);
     }
